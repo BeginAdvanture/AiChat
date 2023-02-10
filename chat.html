@@ -1,11 +1,12 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width-device-width,inital-scale=1.0">
         <title>AiChat</title>
     </head>
+    
     <body>
         <style>
             .chat-content{
@@ -33,6 +34,7 @@
         <input class="chat-box" id="input">
         <button id="send">전송</button>
 
+
         <script type="module">
 
             import {Configuration, OpenAIApi} from 'http://cdn.skypack.dev/openai';
@@ -42,35 +44,29 @@
                 <span class="chat-box mine">${document.querySelector('#input').value}</span>
             </div>`
             document.querySelector('.chat-content').insertAdjacentHTML('beforeend',template);
-
-            const{Configuration,OpenAIApi } = require("openai");
-
-
+            
             const configuration = new Configuration({
-                apiKey: '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',
-            });
-            const openai = new OpenAIApi(configurationw);
+            apiKey: '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',});
+            const openai = new OpenAIApi(configuration);
 
             openai.createCompletion({
-                model : "text-davinci-002",
-                prompt: document.querySelector('#input').value,
-                temperature:0.7,
-                max_tokens:256,
-                top_p:1,
-                frequency_penalty:0,
-                presence_penalty:0,
+            model: "text-davinci-003",
+            prompt: document.querySelector('#input').value,
+            temperature: 0.7,
+            max_tokens: 256,
+            top_p: 1,
+            frequency_penalty: 0,
+            presence_penalty: 0,
             }).than((result)=>{
                 console.log(result.data.choices[0].text)
                 var template = `<div class="line">
                 <span class="chat-box">${result.data.choices[0].text}</span>
                 </div>`
                 document.querySelector('.chat-content').insertAdjacentHTML('beforeend',template);
-
+                })
             })
+            
 
-
-
-            })
         </script>
 
     </body>
